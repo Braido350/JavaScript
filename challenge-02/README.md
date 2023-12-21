@@ -82,12 +82,12 @@ function func(x, y, z) {
 };
 
 // Invoque a função acima utilizando todas as possibilidades (com nenhum argumento, com um, com dois e com três.) Coloque um comentário de linha ao lado da função com o resultado de cada invocação.
-func(10)
-//10
-func(10,20)
-//30
-func(10,20,30)
-//10.666666666666666
-func()
-//false
+func(10) //10
+
+func(10,20) //30
+
+func(10,20,30) //10.666666666666666
+
+func() //false
+
 ```
