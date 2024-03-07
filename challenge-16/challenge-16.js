@@ -67,14 +67,17 @@ Usando o replace(), faça a string "Roberto" virar "Roberta".
 Mostre o resultado no console.
 */
   console.log('\nEra "Roberto", agora é:');
-  // ?
+  var roberto = 'Roberto'
+  console.log(roberto.replace('to', 'ta'))
 
   /*
 Mostre no console a parte "nando" da string "Fernando". Use o método que
 faz a busca do final para o início da string.
 */
   console.log("\nParte de uma string:");
-  // ?
+  var name = 'Fernando'
+  var nando = name.substring(name.lastIndexOf('na'))
+  console.log(nando)
 
   /*
 Declare uma variável chamada `myName`, que receba o seu primeiro nome,
@@ -86,5 +89,11 @@ de qualquer tamanho, escrito de qualquer forma.
 Ex.: Nomes que deveriam funcionar: "Fernando", "RoBertO", "gabriEla", etc.
 */
   console.log("\nNome com letras intercaladas entre caixa alta e baixa:");
-  // ?
+  var myName = 'Paulo'
+  var nameArray = myName.split('')
+  var map = nameArray.map(function(acumulado, indice, Array){
+    return indice % 2 === 0 ? acumulado.toUpperCase() : acumulado.toLowerCase()
+  })
+  var result = map.join('')
+  console.log(result)
 })();
