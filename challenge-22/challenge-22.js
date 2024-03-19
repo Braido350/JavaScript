@@ -69,6 +69,10 @@
   */
   console.log( '\nSomar números entrados pelo usuário:' );
   // ?
+<<<<<<< HEAD
 
 
 }());
+=======
+}());
+>>>>>>> 098eced (alteraçoes)
