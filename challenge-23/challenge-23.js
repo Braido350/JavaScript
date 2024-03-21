@@ -1,4 +1,5 @@
-(function(){
+(function(win, doc){
+  'use strict';
 /*
 Vamos desenvolver mais um projeto. A ideia é fazer uma mini-calculadora.
 As regras são:
@@ -24,4 +25,22 @@ multiplicação (x), então no input deve aparecer "1+2x".
 input;
 - Ao pressionar o botão "CE", o input deve ficar zerado.
 */
-}());
+var $visor = doc.querySelector('[data-js="visor"]')
+var $buttonsNumbers = doc.querySelectorAll('[data-js="buttons-numbers"]')
+
+Array.prototype.forEach.call($buttonsNumbers, function(button){
+  button.addEventListener('click', handleClickNumber, false);
+});
+
+function handleClickNumber(event){
+  $visor.value += this.value;
+}
+
+
+
+
+
+
+
+
+}(window, document));
