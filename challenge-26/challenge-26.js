@@ -1,4 +1,5 @@
 (function(window, document){
+  'use strict'
   /*
   O desafio dessa semana é criar uma mini library (biblioteca) para
   reutilizarmos nossos códigos quando fizermos manipulação de DOM!
@@ -21,23 +22,24 @@
   Só passe para o próximo problema quando tiver resolvido o anterior :)
   */
 
-  class DOM {
-    constructor(elements) {
-      this.element = document.querySelectorAll(elements);
-    }
-    on(eventType, callback) {
-      Array.prototype.forEach.call(this.element, function (element) {
-        element.addEventListener(eventType, callback, false);
-      });
-    }
-    off(eventType, callback) {
-      Array.prototype.forEach.call(this.element, function (element) {
-        element.removeEventListener(eventType, callback, false);
-      });
-    }
-    get() {
-      return this.element;
-    }
+  function DOM(elements){
+    this.element = document.querySelectorAll(elements);
+  };
+
+  DOM.prototype.on = function on(eventType, callback) {
+    Array.prototype.forEach.call(this.element, function (element) {
+      element.addEventListener(eventType, callback, false);
+    });
+  };
+
+  DOM.prototype.off = function off(eventType, callback) {
+    Array.prototype.forEach.call(this.element, function (element) {
+      element.removeEventListener(eventType, callback, false);
+    });
+  };
+
+  DOM.prototype.get = function get(){
+    return this.element;
   };
 
   var $a = new DOM('[data-js="link"]');
