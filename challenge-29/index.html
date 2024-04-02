@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Braido&Braido</title>
+</head>
+<body>
+  <header>
+    <h1>
+      <span data-js="company-name"></span>-
+      <span data-js="company-phone"></span>
+    </h1>
+  </header>
+
+  <div class="container">
+    <form data-js="from-register">
+      <ul>
+        <li>
+          <label for="">Imagem do carro:</label>
+          <input data-js="imgCar" type="url">
+        </li>
+        <li>
+          <label for="">Marca/Modelo:</label>
+          <input data-js="marcModel" type="text">
+        </li>
+        <li>
+          <label for="">Ano:</label>
+          <input data-js="ano" type="text">
+        </li>
+        <li>
+          <label for="">Placa:</label>
+          <input data-js="placa" type="text">
+        </li>
+        <li>
+          <label for="">Cor:</label>
+          <input data-js="cor" type="text">
+        </li>
+        <button type="submit" data-js="cadastro">Cadastrar</button>
+      </ul>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Imagem do carro</th>
+          <th>Marca/Modelo</th>
+          <th>Ano</th>
+          <th>Placa</th>
+          <th>Cor</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <script src="dom.js"></script>
+  <script src="challenge-29.js"></script>
+</body>
+</html>
