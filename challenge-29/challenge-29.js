@@ -1,4 +1,4 @@
-(function() {
+(function(DOM, doc) {
   'use strict';
 
   /*
@@ -35,5 +35,7 @@
   E aqui nesse arquivo, faça a lógica para cadastrar os carros, em um módulo
   que será nomeado de "app".
   */
-
-})();
+  function app(){
+    
+  }
+})(window.DOM, document);
