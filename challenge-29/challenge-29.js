@@ -1,4 +1,4 @@
-(function(DOM, doc) {
+(function (DOM, doc) {
   'use strict';
 
   /*
@@ -35,7 +35,50 @@
   E aqui nesse arquivo, faça a lógica para cadastrar os carros, em um módulo
   que será nomeado de "app".
   */
-  function app(){
-    
+  function app() {
+    var ajax = new XMLHttpRequest();
+    var $companyName = new DOM('[data-js="company-name"]');
+    var $companyPhone = new DOM('[data-js="company-phone"]')
+    var $formCep = new DOM('[data-js="from-register"]');
+
+    function calJSON() {
+      ajax.open('GET', 'company.json', true);
+      ajax.send();
+      ajax.addEventListener('readystatechange', handleReadyStateChange);
+    }
+
+    function handleReadyStateChange() {
+      if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
+        var response = JSON.parse(ajax.responseText);
+        displayData(response);
+      }
+    }
+
+    function displayData(dados){
+      var nameElement = document.createElement('p');
+       nameElement.textContent = dados.name;
+      var phoneElement = document.createElement('p');
+       phoneElement.textContent = dados.phone;
+      $companyName.get()[0].appendChild(nameElement)
+      $companyPhone.get()[0].appendChild(phoneElement)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    calJSON();
   }
+  app();
+
 })(window.DOM, document);
