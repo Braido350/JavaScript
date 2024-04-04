@@ -66,22 +66,66 @@
 
     function newForm(event){
       event.preventDefault();
-      var $imgCar = new DOM('[data-js="imgCar"]').get()[0].value;
-      var $marca = new DOM('[data-js="marca"]').get()[0].value;
-      var $ano = new DOM('[data-js="ano"]').get()[0].value;
-      var $placa = new DOM('[data-js="placa"]').get()[0].value;
-      var $cor = new DOM('[data-js="cor"]').get()[0].value;
-      var formData = {
-        imgCar: $imgCar,
-        marca: $marca,
-        ano: $ano,
-        placa: $placa,
-        cor: $cor
-      };
+      var formData = getFormData();
+      appendRowToTable(formData);
+    };
+
+    function getFormData(){
+      return{
+        imgCar: new DOM('[data-js="imgCar"]').get()[0].value,
+        marca: new DOM('[data-js="marca"]').get()[0].value,
+        ano: new DOM('[data-js="ano"]').get()[0].value,
+        placa: new DOM('[data-js="placa"]').get()[0].value,
+        cor: new DOM('[data-js="cor"]').get()[0].value
+      }
+    }
+
+    function appendRowToTable(formData){
+      var newRow = createTableRow(formData);
+      var tableBody = doc.querySelector('table tBody');
+      tableBody.appendChild(newRow);
+    }
+
+    function isImageURL(url) {
+      var img = new Image();
+      img.src = url;
+      return img.complete && img.naturalWidth !== 0;
+    }
+
+    function createImageElement(url) {
+      var img = document.createElement('img');
+      img.src = url;
+      img.alt = 'Imagem do carro';
+      return img;
+    }
+
+    function createTableRow(formData){
+      var newRow = doc.createElement('tr');
+      appendCellToRow(newRow, formData.imgCar);
+      appendCellToRow(newRow, formData.marca);
+      appendCellToRow(newRow, formData.ano);
+      appendCellToRow(newRow, formData.placa);
+      appendCellToRow(newRow, formData.cor);
+      return newRow;
+    }
+
+    function appendCellToRow(row, value) {
+      var cell = document.createElement('td');
+      cell.appendChild(isImageURL(value) ? createImageElement(value) : document.createTextNode(value));
+      row.appendChild(cell);
+    }
+
+    function appendCellToRow(row, value){
+      var cell = doc.createElement('td');
+      cell.textContent = value;
+      row.appendChild(cell);
     }
 
     calJSON();
-  }
-  app();
+  };
+  
+  doc.addEventListener('DOMContentLoaded', function(){
+    app();
+  });
 
 })(window.DOM, document);
