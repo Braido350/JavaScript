@@ -35,7 +35,7 @@
   E aqui nesse arquivo, faça a lógica para cadastrar os carros, em um módulo
   que será nomeado de "app".
   */
-  function app() {
+ function app() {
     var ajax = new XMLHttpRequest();
     var $companyName = new DOM('[data-js="company-name"]');
     var $companyPhone = new DOM('[data-js="company-phone"]')
@@ -65,29 +65,20 @@
     }
 
     function newForm(event){
-        event.preventDefault();
+      event.preventDefault();
       var $imgCar = new DOM('[data-js="imgCar"]').get()[0].value;
       var $marca = new DOM('[data-js="marca"]').get()[0].value;
       var $ano = new DOM('[data-js="ano"]').get()[0].value;
       var $placa = new DOM('[data-js="placa"]').get()[0].value;
       var $cor = new DOM('[data-js="cor"]').get()[0].value;
-      console.log($marca, $ano, $placa, $cor)
+      var formData = {
+        imgCar: $imgCar,
+        marca: $marca,
+        ano: $ano,
+        placa: $placa,
+        cor: $cor
+      };
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     calJSON();
   }
