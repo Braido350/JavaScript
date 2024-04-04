@@ -39,7 +39,10 @@
     var ajax = new XMLHttpRequest();
     var $companyName = new DOM('[data-js="company-name"]');
     var $companyPhone = new DOM('[data-js="company-phone"]')
-    var $formCep = new DOM('[data-js="from-register"]');
+    var $formRegister = new DOM('[data-js="from-register"]');
+    var phoneElement = document.createElement('p');
+    var nameElement = document.createElement('p');
+    $formRegister.on('submit', newForm);
 
     function calJSON() {
       ajax.open('GET', 'company.json', true);
@@ -55,13 +58,22 @@
     }
 
     function displayData(dados){
-      var nameElement = document.createElement('p');
-       nameElement.textContent = dados.name;
-      var phoneElement = document.createElement('p');
-       phoneElement.textContent = dados.phone;
+      nameElement.textContent = dados.name;
+      phoneElement.textContent = dados.phone;
       $companyName.get()[0].appendChild(nameElement)
       $companyPhone.get()[0].appendChild(phoneElement)
     }
+
+    function newForm(event){
+        event.preventDefault();
+      var $imgCar = new DOM('[data-js="imgCar"]').get()[0].value;
+      var $marca = new DOM('[data-js="marca"]').get()[0].value;
+      var $ano = new DOM('[data-js="ano"]').get()[0].value;
+      var $placa = new DOM('[data-js="placa"]').get()[0].value;
+      var $cor = new DOM('[data-js="cor"]').get()[0].value;
+      console.log($marca, $ano, $placa, $cor)
+    }
+
 
 
 
