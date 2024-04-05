@@ -35,10 +35,10 @@
   E aqui nesse arquivo, faça a lógica para cadastrar os carros, em um módulo
   que será nomeado de "app".
   */
- function app() {
+  function app() {
     var ajax = new XMLHttpRequest();
     var $companyName = new DOM('[data-js="company-name"]');
-    var $companyPhone = new DOM('[data-js="company-phone"]')
+    var $companyPhone = new DOM('[data-js="company-phone"]');
     var $formRegister = new DOM('[data-js="from-register"]');
     var phoneElement = document.createElement('p');
     var nameElement = document.createElement('p');
@@ -57,40 +57,48 @@
       }
     }
 
-    function displayData(dados){
+    function displayData(dados) {
       nameElement.textContent = dados.name;
       phoneElement.textContent = dados.phone;
-      $companyName.get()[0].appendChild(nameElement)
-      $companyPhone.get()[0].appendChild(phoneElement)
+      $companyName.get()[0].appendChild(nameElement);
+      $companyPhone.get()[0].appendChild(phoneElement);
     }
 
-    function newForm(event){
+    function newForm(event) {
       event.preventDefault();
       var formData = getFormData();
       appendRowToTable(formData);
-    };
+    }
 
-    function getFormData(){
-      return{
+    function getFormData() {
+      return {
         imgCar: new DOM('[data-js="imgCar"]').get()[0].value,
         marca: new DOM('[data-js="marca"]').get()[0].value,
         ano: new DOM('[data-js="ano"]').get()[0].value,
         placa: new DOM('[data-js="placa"]').get()[0].value,
         cor: new DOM('[data-js="cor"]').get()[0].value
-      }
+      };
     }
 
-    function appendRowToTable(formData){
+    function appendRowToTable(formData) {
       var newRow = createTableRow(formData);
-      var tableBody = doc.querySelector('table tBody');
+      var tableBody = document.querySelector('table tbody');
       tableBody.appendChild(newRow);
     }
 
     function isImageURL(url) {
-      var img = new Image();
-      img.src = url;
-      return img.complete && img.naturalWidth !== 0;
+      return new Promise((resolve, reject) => {
+        var img = new Image();
+        img.onload = function() {
+          resolve(true);
+        };
+        img.onerror = function() {
+          resolve(false);
+        };
+        img.src = url;
+      });
     }
+
 
     function createImageElement(url) {
       var img = document.createElement('img');
@@ -99,9 +107,21 @@
       return img;
     }
 
-    function createTableRow(formData){
-      var newRow = doc.createElement('tr');
-      appendCellToRow(newRow, formData.imgCar);
+    async function addImageOrText(cell, value) {
+      var isImage = await isImageURL(value);
+      if (isImage) {
+        var imgElement = createImageElement(value);
+        cell.appendChild(imgElement);
+      } else {
+        cell.textContent = value;
+      }
+    }
+
+    function createTableRow(formData) {
+      var newRow = document.createElement('tr');
+      var imgCell = document.createElement('td');
+      addImageOrText(imgCell, formData.imgCar);
+      newRow.appendChild(imgCell);
       appendCellToRow(newRow, formData.marca);
       appendCellToRow(newRow, formData.ano);
       appendCellToRow(newRow, formData.placa);
@@ -111,21 +131,16 @@
 
     function appendCellToRow(row, value) {
       var cell = document.createElement('td');
-      cell.appendChild(isImageURL(value) ? createImageElement(value) : document.createTextNode(value));
-      row.appendChild(cell);
-    }
-
-    function appendCellToRow(row, value){
-      var cell = doc.createElement('td');
       cell.textContent = value;
       row.appendChild(cell);
     }
 
     calJSON();
-  };
-  
-  doc.addEventListener('DOMContentLoaded', function(){
-    app();
-  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  app();
+});
+
 
 })(window.DOM, document);
