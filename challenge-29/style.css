@@ -105,3 +105,8 @@ table th {
   background-color: #f2f2f2;
   /* Cor de fundo do cabeçalho */
 }
+
+img {
+  max-width: 18%;
+  height: auto;
+}
